@@ -3,10 +3,41 @@ from node import Node
 
 # Implement your Queue class here
 class Queue:
+    def __init__(self):
+        self.front = None
+        self.rear = None
+
+    def enqueue(self, value): #New nodes are added to the rear of the queue using this method.
+        a_node = Node(value)
+        if not self.front: #If the queue is empty, the front and rear are set to the node.
+            self.front = a_node
+            self.rear = a_node
+        else: #If the queue is not empty, add the new node to the rear of the queue. The rear becomes the new node.
+            self.rear.next = a_node
+            self.rear = a_node
+    def dequeue(self):
+        if not self.front: #If the queue is empty, return None.
+            return None
+        removed_node = self.front #The removed node is currently the front of the queue.
+        self.front = self.front.value #We take the node in the front and move it to the next node.
+
+        if not self.front: #If it's not in front, we still return the removed node's value.
+            self.front = None
+
+        return removed_node.value #otherwise, we return the value of the removed node.
     
-    # Delete the following line and implement your Queue class
-    pass
-    
+    def peek(self):
+        if self.front:
+            return self.front.value
+
+        else:
+            return None
+
+    def print_queue(self):
+        current = self.front
+        while current:
+            print(current.value)
+            current = current.next 
 
 
 def run_help_desk():
