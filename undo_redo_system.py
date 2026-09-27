@@ -69,14 +69,14 @@ def run_undo_redo():
             print(f"Action performed: {action}")
         elif choice == "2":
             action = undo_stack.pop()
-            redo_stack.push()
+            redo_stack.push(action)
             # Pop an action from the undo stack and push it onto the redo stack
             
 
         elif choice == "3":
             action =redo_stack.pop()
             if action != "The stack is empty.":
-                undo_stack.push()
+                undo_stack.push(action)
             # Pop an action from the redo stack and push it onto the undo stack
 
 
