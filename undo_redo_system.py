@@ -7,45 +7,47 @@ class Stack:
         self.top = None #Points to the top of the stack. Currently there is no value that's the top yet.
 
     def pop(self):
-        if len(self.undo_stack) == 0:
+        if self.top is None:
             return "No options to undo."
+        chosen_node = self.top.chosen_node #A node is chosen and stored in the variable chosen_node.
+        self.top = self.top.next #It takes the top node, and movies it to the next node.
+        return chosen_node #It then choses the node that was originally at the top of the stack.
         
-        #if not self.top: #Not sure if this is correct...So save this for later..
-            #return f""
         
-        chosen_node = Node(chosen_node) #A node is created from the node class.
-        chosen_node = self.top #The node we want to undo, becomes the top.
-        self.top = self.top.next #Moves the top attribute to the next node, since we're getting rid of the current top.
-        return chosen_node
 
     def push(self): #Removes the Node at the top of the stack and returns the value.
-        if len(self.redo_stack) == 0:
-            return "No options to redo."
-        chosen_node = Node(chosen_node) #A node is created from the node class.
-        chosen_node.next = self.top #The next node in the stack becomes the top.
-        self.top = chosen_node #The top becomes the newly chosen node.
-        return chosen_node #Returns the newly chosen node.
+        #if len(self.redo_stack) == 0:
+            #return "No options to redo."
+        a_node = Node(a_node) #A node is created from the node class.
+        a_node.next = self.top #The next node in the stack becomes the top.
+        self.top = a_node #The top becomes the newly chosen node.
+        #return a_node #Returns the newly chosen node.
 
     def peek(self): #Returns the value of the node on top without removing it.
-        if not self.top:
+        if not self.top is None:
             return "The stack is empty."
+        return self.top.chosen_node  #Returns the node at the top.
 
     def print_stack(self): #Prints the current stacks options.
         current = self.top
-        if not current:
-            print("The stack is empty...")
+        if current is None:
+            print("The stack is empty.")
             return
-        while current:
-            if input() == 4:
-                print(undo_stack)
-                current = current.next
+        while current: #Not sure if this is correct...
+            print(current.chosen_node)
+            current = current.next
 
-            elif input() == 5:
-                print(redo_stack)
-                current = current.next
+            #if input() == 4:
+                #print(current.undo_stack) #I don't know if this is correct... *FIX LATER*
+
+            #elif input() == 5:
+                #print(current.redo_stack) #I don't know if this is correct... *FIX LATER*
+                #current = current.next
 
 def run_undo_redo():
     # Create instances of the Stack class for undo and redo
+    undo_stack = Stack()
+    redo_stack = Stack()
     #Do I put undo_stack = Stack() and redo_stack = Stack() here?
     while True:
         print("\n--- Undo/Redo Manager ---")
@@ -59,20 +61,21 @@ def run_undo_redo():
 
         if choice == "1":
             action = input("Describe the action (e.g., Insert 'a'): ")
-            action.push(undo_stack)
-            redo_stack.clear() #Clears the redo stack after performing a new action.
+            undo_stack.push(action)
+            redo_stack.Stack() #Clears the redo stack after performing a new action.
             # Push the action onto the undo stack and clear the redo stack
 
             print(f"Action performed: {action}")
         elif choice == "2":
-            action = undo_stack.pop()
-            redo_stack.push(action)
+            undo_stack.pop()
+            undo_stack.push(redo_stack)
             # Pop an action from the undo stack and push it onto the redo stack
             
 
         elif choice == "3":
-            action = redo_stack.pop()
-            undo_stack.push(action)
+            action =redo_stack.pop()
+            if action != "The stack is empty.":
+                redo_stack.push(undo_stack)
             # Pop an action from the redo stack and push it onto the undo stack
 
 
@@ -94,8 +97,5 @@ def run_undo_redo():
         else:
             print("Invalid option.")
 
-#My stacks undo and redo...
-undo_stack = Stack()
-redo_stack = Stack()
 if __name__ == "__main__":
     run_undo_redo()
