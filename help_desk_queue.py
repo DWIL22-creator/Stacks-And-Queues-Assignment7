@@ -42,7 +42,7 @@ class Queue:
 
 def run_help_desk():
     # Create an instance of the Queue class
-    
+    help_desk_queue = Queue()
 
     while True:
         print("\n--- Help Desk Ticketing System ---")
@@ -55,7 +55,7 @@ def run_help_desk():
 
         if choice == "1":
             name = input("Enter customer name: ")
-            # Add the customer to the queue
+            help_desk_queue.enqueue(name)
             
             
             print(f"{name} added to the queue.")
@@ -72,6 +72,7 @@ def run_help_desk():
         elif choice == "4":
             # Print all customers in the queue
             print("\nWaiting customers:")
+            help_desk_queue.print_queue()
             
 
         elif choice == "5":
