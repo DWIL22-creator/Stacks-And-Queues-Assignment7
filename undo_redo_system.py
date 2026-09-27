@@ -11,10 +11,9 @@ class Stack:
             return "No options to undo."
         chosen_node = self.value #A node is chosen and stored in the variable chosen_node.
         self.value = self.value.next #It takes the top node, and movies it to the next node.
-        return chosen_node #It then choses the node that was originally at the top of the stack.
+        return chosen_node.value #It then choses the node that was originally at the top of the stack.
         
         
-
     def push(self, a_node): #Removes the Node at the top of the stack and returns the value.
 
         a_node = Node(a_node) #A node is created from the node class.
@@ -23,7 +22,7 @@ class Stack:
         #return a_node #Returns the newly chosen node.
 
     def peek(self): #Returns the value of the node on top without removing it.
-        if not self.value is None:
+        if not self.value is None: #FIXX
             return "The stack is empty."
         return self.value.chosen_node  #Returns the node at the top.
 
@@ -36,12 +35,6 @@ class Stack:
             print(current.value)
             current = current.next
 
-            #if input() == 4:
-                #print(current.undo_stack) #I don't know if this is correct... *FIX LATER*
-
-            #elif input() == 5:
-                #print(current.redo_stack) #I don't know if this is correct... *FIX LATER*
-                #current = current.next
     def clear(self):
         self.value = None
 
