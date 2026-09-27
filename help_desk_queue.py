@@ -3,6 +3,7 @@ from node import Node
 
 # Implement your Queue class here
 class Queue:
+    
     # Delete the following line and implement your Queue class
     pass
     
