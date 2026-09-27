@@ -4,37 +4,36 @@ from node import Node
 # Implement your Stack class here
 class Stack:
     def __init__(self):
-        self.top = None #Points to the top of the stack. Currently there is no value that's the top yet.
+        self.value = None #Points to the top of the stack. Currently there is no value that's the top yet.
 
     def pop(self):
-        if self.top is None:
+        if self.value is None:
             return "No options to undo."
-        chosen_node = self.top.chosen_node #A node is chosen and stored in the variable chosen_node.
-        self.top = self.top.next #It takes the top node, and movies it to the next node.
+        chosen_node = self.value #A node is chosen and stored in the variable chosen_node.
+        self.value = self.value.next #It takes the top node, and movies it to the next node.
         return chosen_node #It then choses the node that was originally at the top of the stack.
         
         
 
-    def push(self): #Removes the Node at the top of the stack and returns the value.
-        #if len(self.redo_stack) == 0:
-            #return "No options to redo."
+    def push(self, a_node): #Removes the Node at the top of the stack and returns the value.
+
         a_node = Node(a_node) #A node is created from the node class.
-        a_node.next = self.top #The next node in the stack becomes the top.
-        self.top = a_node #The top becomes the newly chosen node.
+        a_node.next = self.value #The next node in the stack becomes the top.
+        self.value = a_node #The top becomes the newly chosen node.
         #return a_node #Returns the newly chosen node.
 
     def peek(self): #Returns the value of the node on top without removing it.
-        if not self.top is None:
+        if not self.value is None:
             return "The stack is empty."
-        return self.top.chosen_node  #Returns the node at the top.
+        return self.value.chosen_node  #Returns the node at the top.
 
     def print_stack(self): #Prints the current stacks options.
-        current = self.top
+        current = self.value
         if current is None:
             print("The stack is empty.")
             return
         while current: #Not sure if this is correct...
-            print(current.chosen_node)
+            print(current.value)
             current = current.next
 
             #if input() == 4:
@@ -43,6 +42,8 @@ class Stack:
             #elif input() == 5:
                 #print(current.redo_stack) #I don't know if this is correct... *FIX LATER*
                 #current = current.next
+    def clear(self):
+        self.value = None
 
 def run_undo_redo():
     # Create instances of the Stack class for undo and redo
@@ -62,12 +63,12 @@ def run_undo_redo():
         if choice == "1":
             action = input("Describe the action (e.g., Insert 'a'): ")
             undo_stack.push(action)
-            redo_stack.Stack() #Clears the redo stack after performing a new action.
+            redo_stack.clear() #Clears the redo stack after performing a new action.
             # Push the action onto the undo stack and clear the redo stack
 
             print(f"Action performed: {action}")
         elif choice == "2":
-            undo_stack.pop()
+            undo_stack.pop(action)
             undo_stack.push(redo_stack)
             # Pop an action from the undo stack and push it onto the redo stack
             
