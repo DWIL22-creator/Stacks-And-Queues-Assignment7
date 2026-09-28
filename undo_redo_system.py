@@ -8,7 +8,7 @@ class Stack:
 
     def pop(self):
         if self.value is None:
-            return "No options to undo."
+            return "The stack is empty."
         chosen_node = self.value #A node is chosen and stored in the variable chosen_node.
         self.value = self.value.next #It takes the top node, and movies it to the next node.
         return chosen_node.value #It then choses the node that was originally at the top of the stack.
