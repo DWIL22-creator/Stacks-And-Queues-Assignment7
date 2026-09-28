@@ -15,29 +15,31 @@ class Queue:
         else: #If the queue is not empty, add the new node to the rear of the queue. The rear becomes the new node.
             self.rear.next = a_node
             self.rear = a_node
+
     def dequeue(self):
         if not self.front: #If the queue is empty, return None.
             return None
         removed_node = self.front #The removed node is currently the front of the queue.
-        self.front = self.front.value #We take the node in the front and move it to the next node.
-
+        self.front = self.front.next #We take the node in the front and move it to the next node.
+    
         if not self.front: #If it's not in front, we still return the removed node's value.
             self.front = None
 
         return removed_node.value #otherwise, we return the value of the removed node.
     
     def peek(self):
-        if self.front:
-            return self.front.value
-
-        else:
+        if not self.front:
             return None
+        return self.front.value
 
     def print_queue(self):
         current = self.front
+        if not current:
+            print("The queue is empty.")
+            return
         while current:
-            print(current.value)
-            current = current.next 
+            print(f"- {current.value}")
+            current = current.next #Updates current to the next node in the queue.
 
 
 def run_help_desk():
@@ -56,18 +58,17 @@ def run_help_desk():
         if choice == "1":
             name = input("Enter customer name: ")
             help_desk_queue.enqueue(name)
-            
-            
+            #help_desk_queue.print_queue()
             print(f"{name} added to the queue.")
         elif choice == "2":
             # Help the next customer in the queue and return message that they were helped
-            pass # delete this line
-
+            helped_customer = help_desk_queue.dequeue()
+            if helped_customer is not None:
+                print(f"{helped_customer} was helped.")
 
         elif choice == "3":
-            # Peek at the next customer in the queue and return their name
-            pass # delete this line
-
+            print(f"Next customer: {help_desk_queue.peek()}")
+            #Prints the next customer in the queue by using peek.
 
         elif choice == "4":
             # Print all customers in the queue

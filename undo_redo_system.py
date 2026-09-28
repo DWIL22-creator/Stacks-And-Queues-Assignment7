@@ -22,7 +22,7 @@ class Stack:
         #return a_node #Returns the newly chosen node.
 
     def peek(self): #Returns the value of the node on top without removing it.
-        if not self.value is None: #FIXX
+        if not self.value is None:
             return "The stack is empty."
         return self.value.chosen_node  #Returns the node at the top.
 
